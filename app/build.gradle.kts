@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.tools.core)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -81,9 +83,6 @@ dependencies {
 
     // Serialization
     implementation(libs.kotlinx.serialization.json)
-
-    // Coil
-    implementation(libs.coil.compose)
 
     // DataStore
     implementation(libs.androidx.datastore.preferences)

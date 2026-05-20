@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mini Banking Simulator</string>
+    <string name="main_screen">Головна</string>
+    <string name="settings_screen">Налаштування</string>
 </resources>

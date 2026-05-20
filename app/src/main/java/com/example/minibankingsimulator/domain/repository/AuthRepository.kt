@@ -1,6 +1,5 @@
 package com.example.minibankingsimulator.domain.repository
 
-import com.example.minibankingsimulator.domain.model.Account
 import com.example.minibankingsimulator.domain.model.User
 
 interface AuthRepository {
