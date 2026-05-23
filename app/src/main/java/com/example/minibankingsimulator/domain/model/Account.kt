@@ -5,7 +5,6 @@ import com.example.minibankingsimulator.domain.enums.CurrencyType
 import java.math.BigDecimal
 
 data class Account(
-    val id: String,
     val iban: String,
     val balance: BigDecimal,
     val currency: CurrencyType,
@@ -14,7 +13,6 @@ data class Account(
 
 fun AccountEntity.toDomain(cards: List<Card> = emptyList()): Account {
     return Account(
-        id = this.accountId,
         iban = this.iban,
         balance = this.balance,
         currency = this.currency,
@@ -24,7 +22,6 @@ fun AccountEntity.toDomain(cards: List<Card> = emptyList()): Account {
 
 fun Account.toEntity(userId: String): AccountEntity {
     return AccountEntity(
-        accountId = this.id,
         userId = userId,
         iban = this.iban,
         balance = this.balance,

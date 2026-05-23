@@ -1,4 +1,4 @@
-package com.example.minibankingsimulator.domain.validateRegister
+package com.example.minibankingsimulator.domain.usecases.validateRegister
 
 import javax.inject.Inject
 

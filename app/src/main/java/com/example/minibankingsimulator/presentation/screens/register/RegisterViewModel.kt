@@ -3,9 +3,9 @@ package com.example.minibankingsimulator.presentation.screens.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.minibankingsimulator.domain.usecases.SignUpUseCase
-import com.example.minibankingsimulator.domain.validateRegister.ValidateEmail
-import com.example.minibankingsimulator.domain.validateRegister.ValidatePassword
-import com.example.minibankingsimulator.domain.validateRegister.ValidatePhoneNumber
+import com.example.minibankingsimulator.domain.usecases.validateRegister.ValidateEmail
+import com.example.minibankingsimulator.domain.usecases.validateRegister.ValidatePassword
+import com.example.minibankingsimulator.domain.usecases.validateRegister.ValidatePhoneNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
