@@ -20,6 +20,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.minibankingsimulator.R
 import com.example.minibankingsimulator.presentation.screens.login.LoginScreen
+import com.example.minibankingsimulator.presentation.screens.login.LoginViewModel
+import com.example.minibankingsimulator.presentation.screens.mainScreen.MainScreen
 import com.example.minibankingsimulator.presentation.screens.register.RegisterScreen
 import com.example.minibankingsimulator.presentation.screens.register.RegisterViewModel
 
@@ -55,6 +57,7 @@ fun AppNavigation() {
     }
 
     val registerViewModel: RegisterViewModel = hiltViewModel()
+    val loginViewModel: LoginViewModel = hiltViewModel()
 
     Scaffold(
         bottomBar = {
@@ -97,10 +100,13 @@ fun AppNavigation() {
                 RegisterScreen(registerViewModel, navController)
             }
             composable<LoginRoute> {
-                LoginScreen()
+                LoginScreen(
+                    viewModel = loginViewModel,
+                    navController = navController
+                )
             }
             composable<MainRoute> {
-                // TODO: Add MainScreen
+                MainScreen()
             }
             composable<SettingsRoute> {
                 // TODO: Add SettingsScreen

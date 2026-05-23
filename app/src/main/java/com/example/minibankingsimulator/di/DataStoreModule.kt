@@ -12,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session_prefs")
+private val Context.session_pref: DataStore<Preferences> by preferencesDataStore(name = "session_prefs")
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -21,7 +21,7 @@ object DataStoreModule {
     @Provides
     @Singleton
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.dataStore
+        return context.session_pref
     }
 
     @Provides

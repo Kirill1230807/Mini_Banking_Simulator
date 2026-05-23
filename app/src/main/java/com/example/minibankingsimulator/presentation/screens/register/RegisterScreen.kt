@@ -1,6 +1,5 @@
 package com.example.minibankingsimulator.presentation.screens.register
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.navigation.compose.rememberNavController
 import com.example.minibankingsimulator.core.ui.theme.AppTheme
 import com.example.minibankingsimulator.presentation.navigation.LoginRoute
 
@@ -28,6 +27,7 @@ fun RegisterScreen(
     val formState by viewModel.formState.collectAsStateWithLifecycle()
 
     RegisterContent(
+        navController = navController,
         uiState = uiState,
         formState = formState,
         onFirstNameChange = viewModel::updateFirstName,
@@ -47,6 +47,7 @@ fun RegisterScreen(
 
 @Composable
 fun RegisterContent(
+    navController: NavController,
     uiState: RegisterScreenState,
     formState: RegisterFormState,
     onFirstNameChange: (String) -> Unit,
@@ -132,7 +133,16 @@ fun RegisterContent(
                 singleLine = true
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Маєте аккаунт?")
+                TextButton(onClick = { navController.navigate(LoginRoute) }) {
+                    Text("Увійти")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = onRegisterClick,
@@ -158,12 +168,9 @@ fun RegisterContent(
     }
 }
 
-@Preview(
-    name = "Dark Mode",
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, name = "Initial State")
 @Composable
-private fun RegisterPreview() {
+private fun RegisterInitialPreview() {
     AppTheme {
         RegisterContent(
             uiState = RegisterScreenState.Initial,
@@ -173,7 +180,75 @@ private fun RegisterPreview() {
             onPhoneNumberChange = {},
             onEmailChange = {},
             onPasswordChange = {},
-            onRegisterClick = {}
+            onRegisterClick = {},
+            navController = rememberNavController()
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Loading State")
+@Composable
+private fun RegisterLoadingPreview() {
+    AppTheme {
+        RegisterContent(
+            uiState = RegisterScreenState.Loading,
+            formState = RegisterFormState(
+                firstName = "Іван",
+                lastName = "Іванов",
+                email = "ivan@example.com"
+            ),
+            onFirstNameChange = {},
+            onLastNameChange = {},
+            onPhoneNumberChange = {},
+            onEmailChange = {},
+            onPasswordChange = {},
+            onRegisterClick = {},
+            navController = rememberNavController()
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Error State")
+@Composable
+private fun RegisterErrorPreview() {
+    AppTheme {
+        RegisterContent(
+            uiState = RegisterScreenState.Error("Користувач з таким Email вже існує"),
+            formState = RegisterFormState(
+                firstName = "Іван",
+                lastName = "Іванов",
+                email = "ivan@example.com"
+            ),
+            onFirstNameChange = {},
+            onLastNameChange = {},
+            onPhoneNumberChange = {},
+            onEmailChange = {},
+            onPasswordChange = {},
+            onRegisterClick = {},
+            navController = rememberNavController()
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Validation Errors")
+@Composable
+private fun RegisterValidationErrorsPreview() {
+    AppTheme {
+        RegisterContent(
+            uiState = RegisterScreenState.Initial,
+            formState = RegisterFormState(
+                email = "invalid-email",
+                emailError = "Невірний формат email",
+                password = "123",
+                passwordError = "Пароль надто короткий"
+            ),
+            onFirstNameChange = {},
+            onLastNameChange = {},
+            onPhoneNumberChange = {},
+            onEmailChange = {},
+            onPasswordChange = {},
+            onRegisterClick = {},
+            navController = rememberNavController()
         )
     }
 }
